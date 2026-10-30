@@ -16,11 +16,7 @@ body {
     padding: 20px;
 }
 
-header {
-    text-align: center;
-    padding: 20px 0 30px 0;
-}
-
+header { text-align: center; padding: 20px 0 30px 0; }
 header h1 { font-size: 2rem; color: #fff; }
 header p { color: #888; margin-top: 8px; }
 
@@ -40,9 +36,7 @@ header p { color: #888; margin-top: 8px; }
     transition: transform 0.2s, box-shadow 0.2s;
     border: 1px solid #2a2a2a;
 }
-
 .game-card:active { transform: scale(0.97); }
-
 .game-cover {
     width: 100%;
     aspect-ratio: 1 / 1;
@@ -50,22 +44,8 @@ header p { color: #888; margin-top: 8px; }
     background-position: center;
     background-color: #222;
 }
-
-.game-card h3 {
-    font-size: 0.9rem;
-    padding: 10px 12px 4px 12px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.game-card p {
-    font-size: 0.75rem;
-    color: #888;
-    padding: 0 12px 12px 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
+.game-card h3 { font-size: 0.9rem; padding: 10px 12px 4px 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.game-card p { font-size: 0.75rem; color: #888; padding: 0 12px 12px 12px; text-transform: uppercase; }
 
 /* ===== Emulator View ===== */
 #emulator-view {
@@ -80,17 +60,56 @@ header p { color: #888; margin-top: 8px; }
     height: 100%;
 }
 
+/* Moved to bottom, centered, and made bigger */
 #back-btn {
     position: absolute;
-    top: 12px;
-    left: 12px;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 200;
-    padding: 8px 16px;
-    background: rgba(0,0,0,0.7);
+    padding: 12px 24px;
+    background: rgba(229, 9, 20, 0.9);
     color: #fff;
-    border: 1px solid #444;
-    border-radius: 20px;
-    font-size: 14px;
+    border: 2px solid #ff4d4d;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
-    backdrop-filter: blur(4px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+    transition: background 0.2s;
+}
+#back-btn:active { background: #b30000; }
+
+/* ===== Realistic Virtual Gamepad Styling ===== */
+/* This targets the EmulatorJS buttons and makes them look like real plastic */
+.ejs_virtualGamepad_button {
+    background: rgba(40, 40, 40, 0.7) !important;
+    border: 2px solid rgba(255, 255, 255, 0.4) !important;
+    border-radius: 50% !important;
+    color: white !important;
+    font-weight: 900 !important;
+    text-shadow: 1px 1px 2px black !important;
+    box-shadow: 0 6px 0 rgba(0,0,0,0.6), inset 0 2px 5px rgba(255,255,255,0.3) !important;
+    transition: all 0.05s !important;
+}
+
+/* Make buttons press down when tapped */
+.ejs_virtualGamepad_button:active, .ejs_virtualGamepad_button.pressed {
+    transform: translateY(6px) !important;
+    box-shadow: 0 0px 0 rgba(0,0,0,0.6), inset 0 2px 5px rgba(0,0,0,0.5) !important;
+    background: rgba(80, 80, 80, 0.9) !important;
+}
+
+/* Make the D-Pad look more like a real cross */
+.ejs_virtualGamepad_dpad {
+    background: rgba(40, 40, 40, 0.7) !important;
+    border-radius: 10px !important;
+    box-shadow: 0 6px 0 rgba(0,0,0,0.6), inset 0 2px 5px rgba(255,255,255,0.3) !important;
+}
+
+/* Style the analog stick zone */
+.ejs_virtualGamepad_joystick_base {
+    background: rgba(40, 40, 40, 0.7) !important;
+    border: 2px solid rgba(255, 255, 255, 0.4) !important;
+    box-shadow: 0 6px 0 rgba(0,0,0,0.6) !important;
 }
