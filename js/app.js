@@ -7,6 +7,12 @@ const gameLibrary = [
         platform: "n64",
         rom: "roms/nes/snes/gba/psx/n64/Super Mario 64 (USA).z64",
         cover: ""
+    },
+    {
+        name: "Super Mario Advance 2",
+        platform: "gba",
+        rom: "roms/nes/snes/gba/Super Mario Advance 2 - Super Mario World (USA, Australia).gba",
+        cover: ""
     }
     // Add more games below. Don't forget the comma after the bracket above!
 ];
@@ -57,14 +63,14 @@ function launchGame(game) {
     // Forces a lighter emulator core for low-end phones
     window.EJS_forceLegacyCores = true; 
     
-    // Skips 2 frames to keep the game speed fast (sacrifices a little visual smoothness)
+    // Skips 2 frames to keep the game speed fast
     window.EJS_defaultOptions = {
         'frameskips': 2,
         'threads': 2
     };
     // =====================================================
 
-    // Apply the virtual gamepad profile
+    // Apply the virtual gamepad profile for this console
     if (typeof gamepadProfiles !== 'undefined' && gamepadProfiles[game.platform]) {
         window.EJS_VirtualGamepadSettings = gamepadProfiles[game.platform];
     } else {
