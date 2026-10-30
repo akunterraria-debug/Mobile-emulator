@@ -1,10 +1,6 @@
 // js/app.js
 
 // ================= GAME LIBRARY DATABASE =================
-// Add new games by copying one block and editing the values.
-// The 'platform' must be one of: nes, snes, gba, psx, n64
-// The 'rom' path must EXACTLY match the file location on GitHub.
-
 const gameLibrary = [
     {
         name: "Super Mario 64",
@@ -12,13 +8,7 @@ const gameLibrary = [
         rom: "roms/nes/snes/gba/psx/n64/Super Mario 64 (USA).z64",
         cover: ""
     }
-    // Add more games below, separated by commas. Example:
-    // {
-    //     name: "Super Metroid",
-    //     platform: "snes",
-    //     rom: "roms/snes/super-metroid.sfc",
-    //     cover: ""
-    // },
+    // Add more games below. Don't forget the comma after the bracket above!
 ];
 
 // ================= UI RENDERING =================
@@ -50,30 +40,38 @@ function renderLibrary() {
 
 // ================= EMULATOR LAUNCHER =================
 function launchGame(game) {
-    // 1. Switch views
     document.getElementById('library-view').style.display = 'none';
     document.getElementById('emulator-view').style.display = 'block';
 
-    // 2. Clear any previous emulator instance
     const gameContainer = document.getElementById('game');
     gameContainer.innerHTML = '';
 
-    // 3. Configure EmulatorJS globals
     window.EJS_player = '#game';
-    window.EJS_core = game.platform;      // 'n64', 'nes', 'snes', etc.
-    window.EJS_gameUrl = game.rom;        // Path to ROM
-    window.EJS_gameName = game.name;      // Used for save file names
+    window.EJS_core = game.platform;      
+    window.EJS_gameUrl = game.rom;        
+    window.EJS_gameName = game.name;      
     window.EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/';
     window.EJS_startOnLoaded = true;
 
-    // 4. Apply the virtual gamepad profile for this console
+    // ================= PERFORMANCE BOOST =================
+    // Forces a lighter emulator core for low-end phones
+    window.EJS_forceLegacyCores = true; 
+    
+    // Skips 2 frames to keep the game speed fast (sacrifices a little visual smoothness)
+    window.EJS_defaultOptions = {
+        'frameskips': 2,
+        'threads': 2
+    };
+    // =====================================================
+
+    // Apply the virtual gamepad profile
     if (typeof gamepadProfiles !== 'undefined' && gamepadProfiles[game.platform]) {
         window.EJS_VirtualGamepadSettings = gamepadProfiles[game.platform];
     } else {
         delete window.EJS_VirtualGamepadSettings;
     }
 
-    // 5. Load EmulatorJS (remove old loader first to avoid conflicts)
+    // Load EmulatorJS
     const oldScript = document.getElementById('ejs-loader');
     if (oldScript) oldScript.remove();
 
