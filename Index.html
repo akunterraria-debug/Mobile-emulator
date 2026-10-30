@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>My Emulator Hub</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Library View -->
+    <div id="library-view">
+        <header>
+            <h1>🎮 My Emulator Hub</h1>
+            <p>Select a game to play</p>
+        </header>
+        <div id="game-library">
+            <!-- Game cards will be injected here by app.js -->
+        </div>
+    </div>
+
+    <!-- Emulator View (Initially Hidden) -->
+    <div id="emulator-view" style="display: none;">
+        <div id="game-container">
+            <div id="game"></div> <!-- EmulatorJS will inject the canvas here -->
+        </div>
+        <button id="back-btn">← Back to Library</button>
+    </div>
+
+    <!-- Load Scripts in the Correct Order -->
+    <script src="js/settings.js"></script>
+    <script src="js/gamepad-profiles.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
+</html>
